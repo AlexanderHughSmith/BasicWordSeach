@@ -1,23 +1,16 @@
-def hrtl(ans,puzzle):
-	"""Horizontal right to left"""
+def horizontal(ans,puzzle):
 	for x in range (0,len(puzzle)):
 		temp = "".join(map(str,puzzle[x]))
 		if temp.find(ans) > -1:
 			print("Right to Left: ("+str(temp.find(ans)+1)+","+str(x+1)+")")
 			return True
-	return False
-
-def hltr(ans,puzzle):
-	"""Horizontal left to right"""
-	for x in range (0,len(puzzle)):
-		temp = "".join(map(str,puzzle[x]))
 		if temp.find(ans[::-1]) > -1:
 			print("Left to Right (Backwards): ("+str(temp.find(ans[::-1])+1)+","+str(x+1)+")")
 			return True
 	return False
 
-def vnts(ans, puzzle):
-	"""Vertical north to south"""
+
+def vertical(ans, puzzle):
 	for x in range(0, len(puzzle[0])):
 		temp = []
 		for j in range(0, len(puzzle)):
@@ -34,11 +27,9 @@ def vnts(ans, puzzle):
 def solve(ans,puzzle):
 	Found = False
 	while not Found:
-		if hrtl(ans,puzzle):
+		if horizontal(ans,puzzle):
 			break
-		if hltr(ans,puzzle):
-			break
-		if vnts(ans,puzzle):
+		if vertical(ans,puzzle):
 			break
 		else:
 			print("Not found in puzzle")
