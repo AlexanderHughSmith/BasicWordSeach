@@ -23,7 +23,27 @@ def vertical(ans, puzzle):
 			print("Bottom to Top: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
 			return True
 	return False
-	
+
+def diagonal(ans,puzzle):
+	print("CALLED")
+	temp = []
+	for x in range(0,len(puzzle)):
+		temp = []
+		j = 0
+		temp2 = x
+		for j in range(0,len(puzzle)-x):
+			temp.append(puzzle[temp2][j])
+			temp2 += 1
+		#print(temp)
+		temp = "".join(map(str,temp))
+		if temp.find(ans) > -1:
+			print("Diagonal to the Bottom Right: ("+str(x+1)+","+str(temp.find(ans)+1)+")")
+			return True
+		if temp.find(ans[::-1]) > -1:
+			print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
+			return True
+		"""Fix coords"""
+	return False
 def solve(ans,puzzle):
 	Found = False
 	while not Found:
@@ -58,6 +78,8 @@ def print_puzzle(puz):
 		print(puz[x])
 print_puzzle(puzzle)
 
+
 while True:
 	word = input("What word are you looking for: ")
+	diagonal(word,puzzle)
 	solve(word,puzzle)
