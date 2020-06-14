@@ -25,7 +25,7 @@ def vertical(ans, puzzle):
 	return False
 
 def diagonal(ans,puzzle):
-	print("CALLED")
+	#mid-bottom left
 	temp = []
 	for x in range(0,len(puzzle)):
 		temp = []
@@ -37,12 +37,32 @@ def diagonal(ans,puzzle):
 		#print(temp)
 		temp = "".join(map(str,temp))
 		if temp.find(ans) > -1:
-			print("Diagonal to the Bottom Right: ("+str(x+1)+","+str(temp.find(ans)+1)+")")
+			print("Diagol to the Bottom Right: ("+str(x+1)+","+str(temp.find(ans)+1)+")")
 			return True
 		if temp.find(ans[::-1]) > -1:
 			print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
 			return True
 		"""Fix coords"""
+		
+def diagonal2(ans, puzzle):
+	#mid-bottom right
+	for x in range(0, len(puzzle)):
+		temp = []
+		j = len(puzzle)-1
+		temp2 = x
+		while temp2 < len(puzzle):
+			#print(str(x)+","+str(temp2))
+			temp.append(puzzle[temp2][j])
+			j-=1
+			temp2+=1
+		#print(temp)
+		temp = "".join(map(str,temp))
+		if temp.find(ans) > -1:
+			print("Diagonal  the Bottom Right: ("+str(x+1)+","+str(temp.find(ans)+1)+")")
+			return True
+		if temp.find(ans[::-1]) > -1:
+			print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
+			return True
 	return False
 def solve(ans,puzzle):
 	Found = False
@@ -50,6 +70,65 @@ def solve(ans,puzzle):
 		if horizontal(ans,puzzle):
 			break
 		if vertical(ans,puzzle):
+			break
+		else:
+			print("Not found in puzzle")
+			break
+
+def diagonal3(ans, puzzle):
+	#mid-top left
+	for j in range (len(puzzle)-1,0,-1):
+		temp = []
+		x = 0
+		temp2 = j
+		while x != j+1:
+			#print(str(x)+","+str(temp2))
+			temp.append(puzzle[x][temp2])
+			x+=1
+			temp2 -=1
+		temp = "".join(map(str,temp))
+		if temp.find(ans) > -1:
+			print("Diagonal to Bottom Right: ("+str(x+1)+","+str(temp.find(ans)+1)+")")
+			return True
+		if temp.find(ans[::-1]) > -1:
+			print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
+			return True
+	return False
+
+def diagonal4(ans,puzzle):
+	#mid-top right
+	temp = []
+	for x in range(0,len(puzzle)):
+		temp = []
+		j = 0
+		temp2 = x
+		for j in range(0,len(puzzle)-x):
+			temp.append(puzzle[j][temp2])
+			temp2 += 1
+		#print(temp)
+		temp = "".join(map(str,temp))
+		if temp.find(ans) > -1:
+			print("here")
+			print("Diagonal to the Bottom Right: ("+str(j+1)+","+str(temp2+1)+")")
+			return True
+		if temp.find(ans[::-1]) > -1:
+			print("Diagonal to the Top Left: ("+str(j+1)+","+str(temp2+1)+")")
+			return True
+	
+def solve(ans,puzzle):
+	Found = False
+	while not Found:
+		if horizontal(ans,puzzle):
+			break
+		if vertical(ans,puzzle):
+			break
+		if diagonal(ans,puzzle):
+			break
+		if diagonal2(ans,puzzle):
+			break
+		if diagonal3(ans,puzzle):
+			break
+		if diagonal4(ans,puzzle):
 			break
 		else:
 			print("Not found in puzzle")
@@ -81,5 +160,5 @@ print_puzzle(puzzle)
 
 while True:
 	word = input("What word are you looking for: ")
-	diagonal(word,puzzle)
+	diagonal2(word,puzzle)
 	solve(word,puzzle)
