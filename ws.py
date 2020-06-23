@@ -37,10 +37,13 @@ def diagonal(ans,puzzle):
 		#print(temp)
 		temp = "".join(map(str,temp))
 		if temp.find(ans) > -1:
-			print("Diagol to the Bottom Right: ("+str(x+1)+","+str(temp.find(ans)+1)+")")
+			print(temp)
+			print(x)
+			print("Diagonal to the Bottom Right starting at: ("+str(temp.find(ans))+","+str(j)+")")
+			#get y cord of letter and more +1 in bot directions for however long the word is
 			return True
 		if temp.find(ans[::-1]) > -1:
-			print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
+			#print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
 			return True
 		"""Fix coords"""
 		
@@ -64,16 +67,6 @@ def diagonal2(ans, puzzle):
 			print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
 			return True
 	return False
-def solve(ans,puzzle):
-	Found = False
-	while not Found:
-		if horizontal(ans,puzzle):
-			break
-		if vertical(ans,puzzle):
-			break
-		else:
-			print("Not found in puzzle")
-			break
 
 def diagonal3(ans, puzzle):
 	#mid-top left
@@ -118,21 +111,22 @@ def diagonal4(ans,puzzle):
 def solve(ans,puzzle):
 	Found = False
 	while not Found:
-		if horizontal(ans,puzzle):
+		"""if horizontal(ans,puzzle):
 			break
 		if vertical(ans,puzzle):
-			break
+			break"""
 		if diagonal(ans,puzzle):
-			break
-		if diagonal2(ans,puzzle):
-			break
-		if diagonal3(ans,puzzle):
-			break
-		if diagonal4(ans,puzzle):
 			break
 		else:
 			print("Not found in puzzle")
 			break
+		"""if diagonal2(ans,puzzle):
+			break
+		if diagonal3(ans,puzzle):
+			break
+		if diagonal4(ans,puzzle):
+			break"""
+		
 
 l1 = "csmfsnow"
 l2 = "ocbrcsmh"
@@ -160,5 +154,4 @@ print_puzzle(puzzle)
 
 while True:
 	word = input("What word are you looking for: ")
-	diagonal2(word,puzzle)
 	solve(word,puzzle)
