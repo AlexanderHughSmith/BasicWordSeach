@@ -1,4 +1,51 @@
-def horizontal(ans,puzzle):
+import pygame
+pygame.init()
+
+win = pygame.display.set_mode((500,500))
+
+pygame.display.set_caption("First Game")
+
+font = pygame.font.Font("freesansbold.ttf",32)
+
+textX = 10
+textY = 10
+
+l1 = "csmfsnow"
+l2 = "ocbrcsmh"
+l3 = "aaqoobvk"
+l4 = "treslfei"
+l5 = "wfotdqsz"
+l6 = "lwkyqice"
+l7 = "vqwigloo"
+l8 = "hwintern"
+puzzle = [1,2,3,4,5,6,7,8]
+puzzle[0] = list(l1)
+puzzle[1] = list(l2)
+puzzle[2] = list(l3)
+puzzle[3] = list(l4)
+puzzle[4] = list(l5)
+puzzle[5] = list(l6)
+puzzle[6] = list(l7)
+puzzle[7] = list(l8)
+
+
+def print_puzzle(x,y,puz):
+	for j in range (0,len(puz)):
+		temp = " ".join(map(str,puz[j]))
+		display = font.render(temp,True,(255,255,255))
+		win.blit(display,(x,y))
+		y += 25
+		
+
+
+run = True
+
+while run:
+	print_puzzle(textX,textY,puzzle)
+	pygame.display.update()
+
+
+"""def horizontal(ans,puzzle):
 	for x in range (0,len(puzzle)):
 		temp = "".join(map(str,puzzle[x]))
 		if temp.find(ans) > -1:
@@ -45,7 +92,7 @@ def diagonal(ans,puzzle):
 		if temp.find(ans[::-1]) > -1:
 			#print("Bottom to Top Left: ("+str(x+1)+","+str(temp.find(ans[::-1])+len(ans))+")")
 			return True
-		"""Fix coords"""
+		Fix coords
 		
 def diagonal2(ans, puzzle):
 	#mid-bottom right
@@ -111,21 +158,21 @@ def diagonal4(ans,puzzle):
 def solve(ans,puzzle):
 	Found = False
 	while not Found:
-		"""if horizontal(ans,puzzle):
+		if horizontal(ans,puzzle):
 			break
 		if vertical(ans,puzzle):
-			break"""
+			break
 		if diagonal(ans,puzzle):
 			break
 		else:
 			print("Not found in puzzle")
 			break
-		"""if diagonal2(ans,puzzle):
+		if diagonal2(ans,puzzle):
 			break
 		if diagonal3(ans,puzzle):
 			break
 		if diagonal4(ans,puzzle):
-			break"""
+			break
 		
 
 l1 = "csmfsnow"
@@ -155,3 +202,4 @@ print_puzzle(puzzle)
 while True:
 	word = input("What word are you looking for: ")
 	solve(word,puzzle)
+"""
